@@ -15,6 +15,16 @@
                     @endif
 
                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+                    <img src="{{ Auth::user()->picture }}"  >
+                    
+                     {{ Auth::user()->email }}
+
+                    <form method="POST" action="{{ route('edit-profile') }}" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="picture" />
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>

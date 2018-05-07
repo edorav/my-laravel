@@ -1,16 +1,16 @@
 <?php
 // https://www.codereviewz.com/laravel-5-5-user-role-permissions-with-spatie-laravel-permission/
 namespace App\Http\Controllers;
- 
+
 use App\Models\Role;
 use App\Permission;
 use Illuminate\Http\Request;
- 
+
 class RoleController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class RoleController extends Controller
         $roles = Role::all();
         return view('roles.index',compact('roles'));
     }
- 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,7 +33,7 @@ class RoleController extends Controller
         $permissions = Permission::all();//Get all permissions
         return view('roles.create', compact('permissions'));
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -55,7 +55,7 @@ class RoleController extends Controller
         }
         return redirect()->route('roles.index')->with('success','Roles added successfully');
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -66,7 +66,7 @@ class RoleController extends Controller
     {
         //
     }
- 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -79,7 +79,7 @@ class RoleController extends Controller
         $permissions = Permission::all();
         return view('roles.edit', compact('role', 'permissions'));
     }
- 
+
     /**
      * Update the specified resource in storage.
      *
@@ -102,7 +102,7 @@ class RoleController extends Controller
         }
         return redirect()->route('roles.index')->with('success','Roles updated successfully');
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *
