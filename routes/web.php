@@ -42,3 +42,26 @@ Route::group(['prefix' => 'agency'], function(){
     //Route::get('/users/create', 'AdminUserController@create');
     //Route::get('/users/{id}', 'AdminUserController@store');
 });
+
+Route::group(['prefix' => 'roles'], function(){
+    Route::get('/', 'RoleController@index')->name('index-agency');
+    Route::get('/create', 'AgencyController@create')->name('create-agency');
+    Route::post('/', 'AgencyController@store')->name('store-agency');
+    
+    /*
+    GET	/photos	index	photos.index
+    GET	/photos/create	create	photos.create
+    POST	/photos	store	photos.store
+    GET	/photos/{photo}	show	photos.show
+    GET	/photos/{photo}/edit	edit	photos.edit
+    PUT/PATCH	/photos/{photo}	update	photos.update
+    DELETE	/photos/{photo}	destroy	photos.destroy
+    */
+    //Route::get('/users/create', 'AdminUserController@create');
+    //Route::get('/users/{id}', 'AdminUserController@store');
+});
+
+
+Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], function () {
+    Route::get('/', 'RoleController@index')->name('index-agency');
+});

@@ -48,6 +48,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Spatie\Permission\Exceptions\UnauthorizedException) {
+            // Code here ...
+            echo "exception da gestire l'utente non puo accedere(ruolo) in app/exceptions/handler";
+            die;
+        }
+
         return parent::render($request, $exception);
     }
 }
