@@ -39,4 +39,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Agency');
     }
+
+    /**
+     * The agencies that belong to the user.
+     */
+    public function trips()
+    {
+        return $this->hasMany('App\Models\Trip');
+    }
 }

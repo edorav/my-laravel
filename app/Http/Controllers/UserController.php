@@ -113,4 +113,10 @@ class UserController extends Controller
     {
         //
     }
+
+    public function showMyTrip(){
+        $loggedUserTrips = Auth::user()->trips;
+        
+        return view('auth.mytriplist' , compact('loggedUserTrips'));
+    }
 }

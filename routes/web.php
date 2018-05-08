@@ -32,6 +32,7 @@ Route::group(['prefix' => 'user'], function(){
     Auth::routes();
     Route::get('/my-profile', 'UserController@show')->name('myprofile');
     Route::post('/edit', 'UserController@update')->name('edit-profile');
+    Route::get('/my-trips', 'UserController@showMyTrip')->name('mytrips');
 });
 
 Route::group(['prefix' => 'agency'], function(){
