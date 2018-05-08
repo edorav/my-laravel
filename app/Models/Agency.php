@@ -13,6 +13,14 @@ class Agency extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'city'
+        'name', 'address','city', 'postcode'
     ];
+
+    /**
+     * The users that belong to the agency.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 }

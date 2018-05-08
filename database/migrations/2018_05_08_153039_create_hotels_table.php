@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Agency extends Migration
+class CreateHotelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class Agency extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('agencies', function (Blueprint $table) {
+        Schema::create('hotels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50)->unique();
+            $table->string('name');
             $table->string('address');
             $table->string('city');
+            $table->string('stars');
             $table->string('postcode');
             $table->timestamps();
         });
@@ -31,7 +31,6 @@ class Agency extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('agencies');
+        Schema::dropIfExists('hotels');
     }
 }

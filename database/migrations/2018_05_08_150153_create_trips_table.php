@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Agency extends Migration
+class CreateTripsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class Agency extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('agencies', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50)->unique();
-            $table->string('address');
-            $table->string('city');
-            $table->string('postcode');
+            $table->integer('user_id')->unsigned();
+            $table->string('label');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -31,7 +33,6 @@ class Agency extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('agencies');
+        Schema::dropIfExists('trips');
     }
 }

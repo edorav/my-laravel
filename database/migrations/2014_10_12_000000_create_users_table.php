@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('picture')->default('');
             $table->string('email',50)->unique();
             $table->string('password');
+            $table->string('cellnumber');
+            $table->string('locale');
+            $table->string('currencycode');
             $table->rememberToken();
             $table->timestamps();
         });

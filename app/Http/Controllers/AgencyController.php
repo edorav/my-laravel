@@ -23,10 +23,7 @@ class AgencyController extends Controller
         $agencyList = Agency::all();
      
         return view('agency.index')->with( 'list' , $agencyList );
-        foreach($agencyList as $post) {
 
-        }
-        var_dump($agencyList);
     }
 
     /**
@@ -49,10 +46,11 @@ class AgencyController extends Controller
     public function store(Request $request)
     {
         //
-        
         return Agency::create([
             'name' => $request['name'],
-            'city' => $request['city']
+            'address'=>$request['address'],
+            'city' => $request['city'],
+            'postcode' => $request['postcode']
         ]);
     }
 

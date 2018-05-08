@@ -48,12 +48,10 @@ class UserController extends Controller
      */
     public function show()
     {
-        //
-        $loggedUser = Auth::user();
 
-        $userPicture = Storage::get( storage_path( 'app/public/' . $loggedUser->picture ) );
-        var_dump($userPicture);die;
-        return view('auth.myprofile', compact('loggedUser'));
+        $loggedUserAgencies = Auth::user()->agencies;
+        
+        return view('auth.myprofile' , compact('loggedUserAgencies'));
     }
 
     /**
@@ -76,17 +74,33 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        //
         $loggedUser = Auth::user();
 
-        $file=$request->file('picture');
+        if ( $request->file('picture') ){
+            $file = $request->file('picture');
+            $folderId = uniqid();
+            $directory = 'app/public/users/'. $folderId . DIRECTORY_SEPARATOR;
+ 
+            mkdir( storage_path( $directory) );
 
-        $filename  = uniqid() . '.' . pathinfo($file->getClientOriginalName())['extension'];
-		$path = storage_path( 'app/public/' . $filename);
-        $imgResized = Image::make($file)->resize(300, 200)->save($path);
-
-        $loggedUser->picture = $filename;
+            $pathOriginal = storage_path( $directory . 'default' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
+            $pathMiddle = storage_path( $directory . '300x300' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
+            $pathSmall  = storage_path( $directory . '150x150' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
+            $imgResized = Image::make($file)->save($pathOriginal);
+            $imgResized = Image::make($file)->crop(300, 300)->save($pathMiddle);
+            $imgResized = Image::make($file)->crop(150, 150)->save($pathSmall);
+    
+            $loggedUser->picture = $folderId;
+        }
+        
+        $loggedUser->firstname = $request->firstname;
+        $loggedUser->lastname = $request->lastname;
+        $loggedUser->cellnumber = $request->cellnumber;
+        $loggedUser->locale = $request->locale;
+        $loggedUser->currencycode = $request->currencycode;
         $loggedUser->save();
+
+        return back();
     }
 
     /**

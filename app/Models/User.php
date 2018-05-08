@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password',
+        'firstname', 'lastname', 'email', 'password', 'cellnumber' , 'locale' , 'currencycode'
     ];
 
     /**
@@ -31,4 +31,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The agencies that belong to the user.
+     */
+    public function agencies()
+    {
+        return $this->belongsToMany('App\Models\Agency');
+    }
 }

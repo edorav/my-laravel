@@ -27,6 +27,12 @@ class HomeController extends Controller
     {
         $users = User::all();
 
+        /*
+        User::whereNotIn('id', $user->following->lists('id')) // exclude already followed
+        ->where('id', '<>', $user->id) // and the user himself
+        ->take(..)->get()
+        */
+
         $loggedUser = Auth::user();
         $myFriendsRelationships = $loggedUser->getAllFriendships();
 
