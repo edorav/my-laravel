@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TripDaySeeder extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class TripDaySeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\TripDay::class, 250)->create();
+        factory(App\Models\Comment::class, 250)->create();
     }
 }

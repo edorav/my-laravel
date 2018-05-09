@@ -15,4 +15,22 @@ class Trip extends Model
     protected $fillable = [
         'label'
     ];
+
+     /**
+     * The users that belong to the trip.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\Trip');
+    }
+
+    /**
+     * Get the tripdays for the trip.
+     */
+    public function tripdays()
+    {
+        return $this->hasMany('App\Models\TripDay');
+    }
+
+
 }

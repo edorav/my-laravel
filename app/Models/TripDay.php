@@ -13,6 +13,11 @@ class TripDay extends Model
      * @var array
      */
     protected $fillable = [
-        'from' , 'to' , 'city','latitude','longitude'
+        'from' , 'to' 
     ];
+
+    public function trip() 
+    {
+        return $this->belongsTo('App\Models\Trip');
+    }
 }

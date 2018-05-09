@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password', 'cellnumber' , 'locale' , 'currencycode'
+        'firstname', 'lastname', 'email', 'password', 'cellnumber' , 'locale' , 'currencycode', 'gender'
     ];
 
     /**
@@ -45,6 +45,8 @@ class User extends Authenticatable
      */
     public function trips()
     {
-        return $this->hasMany('App\Models\Trip');
+        return $this->belongsToMany('App\Models\Trip');
     }
+
+
 }

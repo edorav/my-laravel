@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hotel extends Model
+class City extends Model
 {
     //
     /**
@@ -13,7 +13,6 @@ class Hotel extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'address', 'stars', 'postcode'
+        'city','country','latitude','longitude'
     ];
- 
 }

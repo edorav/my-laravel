@@ -14,6 +14,8 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
+    $sex = ['F','M'];
+
     return [
         'firstname' => $faker->firstname,
         'lastname' => $faker->firstname,
@@ -22,6 +24,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'cellnumber' => $faker->phoneNumber,
         'locale' => $faker->locale,
-        'currencycode' => $faker->currencyCode
+        'currencycode' => $faker->currencyCode,
+        'gender' => $sex[rand(0,1)]
     ];
 });

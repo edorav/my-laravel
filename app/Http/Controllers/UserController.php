@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,6 +8,10 @@ use Storage;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -103,20 +106,19 @@ class UserController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
+    /**
+    *
+    *   Ritorna tutti i viaggi dell'utente Loggato con la suddivisione in giorni
+    *
+    */
     public function showMyTrip(){
         $loggedUserTrips = Auth::user()->trips;
         
+        foreach($loggedUserTrips as $trip){
+            $loggedUserTrips->tripdays = $trip->tripdays;
+        }
+       // return response()->json($loggedUserTrips);
         return view('auth.mytriplist' , compact('loggedUserTrips'));
     }
 }
