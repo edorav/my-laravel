@@ -56,6 +56,11 @@ Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], fu
     Route::get('/', 'RoleController@index')->name('index-agency');
 });
 
+Route::group(['prefix' => 'trip'], function(){
+    Route::get('/create', 'TripController@create')->name('create-trip');
+    Route::post('/', 'FriendshipController@store')->name('store-friendship');
+});
+
 /*
 $lat = floatval($response['results'][0]['geometry']['location']['lat']);
 $lng = floatval($response['results'][0]['geometry']['location']['lng']);
