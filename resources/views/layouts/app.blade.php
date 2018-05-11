@@ -71,8 +71,9 @@
         <main class="main-content">
             <div class="container-fluid">
                 <div class="row">
+                @if (Auth::check())
                 @include('layouts.components.user-sidebar')
-                    
+                @endif
                     <div class="col-6">
                     @yield('content')
                     </div>
