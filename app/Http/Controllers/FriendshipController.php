@@ -26,4 +26,19 @@ class FriendshipController extends Controller
         // return qualcosa
         return back();
     }
+
+
+    public function showLoggedUserFriends( Request $request ){
+        $loggedUser = Auth::user();
+        $myFriendsRelationships = $loggedUser->getAllFriendships();
+        
+        $myFriends = [];
+        foreach ($myFriendsRelationships as $friend) {
+            $parsedFriend = User::find($friend->recipient_id);
+            if (stripos($parsedFriend->firstname, $request->q) !== false) {
+                $myFriends[] = $parsedFriend;
+            }
+        }
+        echo json_encode($myFriends);
+    }
 }

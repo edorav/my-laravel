@@ -12,4 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+   .js('node_modules/vue2-autocomplete-js/dist/vue2-autocomplete.js', 'public/js')
+   .css('node_modules/vue2-autocomplete-js/dist/style/vue2-autocomplete.css', 'public/css')
    .sass('resources/assets/sass/app.scss', 'public/css');
