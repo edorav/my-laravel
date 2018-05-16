@@ -4,8 +4,12 @@
 
 <new-trip-component
     csrf-token="{{ csrf_token() }}"
-    submit-route="{{ route('store-friendship') }}"
+    submit-route="{{ route('store-trip') }}"
     friendship-route="{{ route('get-friendships-list-by-search') }}"
 ></new-trip-component>
+
+<passport-clients></passport-clients>
+<passport-authorized-clients></passport-authorized-clients>
+<passport-personal-access-tokens></passport-personal-access-tokens>
 
 @endsection

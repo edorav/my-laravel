@@ -29,7 +29,9 @@ class FriendshipController extends Controller
 
 
     public function showLoggedUserFriends( Request $request ){
-        $loggedUser = Auth::user();
+        //$loggedUser = Auth::user();
+        $loggedUser = Auth::guard('api')->user();
+        
         $myFriendsRelationships = $loggedUser->getAllFriendships();
         
         $myFriends = [];
@@ -39,6 +41,11 @@ class FriendshipController extends Controller
                 $myFriends[] = $parsedFriend;
             }
         }
-        echo json_encode($myFriends);
+        if ( $request->wantsJson() ){
+            return response()->json($myFriends);
+        }else{
+
+        }
+        
     }
 }

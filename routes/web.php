@@ -58,8 +58,8 @@ Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], fu
 
 Route::group(['prefix' => 'trip'], function(){
     Route::get('/create', 'TripController@create')->name('create-trip');
-    Route::post('/', 'FriendshipController@store')->name('store-friendship');
-    Route::get('/search', 'FriendshipController@showLoggedUserFriends')->name('get-friendships-list-by-search');
+    Route::post('/', 'FriendshipController@store')->name('store-trip');
+   // Route::get('/search', 'FriendshipController@showLoggedUserFriends')->name('get-friendships-list-by-search');
 });
 
 /*

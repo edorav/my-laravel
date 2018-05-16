@@ -162,7 +162,8 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
         Hootlex\Friendships\FriendshipsServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

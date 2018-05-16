@@ -1,7 +1,8 @@
 <template>
 
-<form role="form" :action="submitRoute" method="post" class="f1">
+<form ref="form" :action="submitRoute" method="post" class="f1">
     <input type="hidden" name="_token" v-model="csrfToken">
+    <input type="text" name="final_form" v-model="finalForm">
     <h3>Register To Our App</h3>
     <p>Fill in the form to get instant access</p>
     <div class="f1-steps">
@@ -22,31 +23,31 @@
         </div>
     </div>
         
-        <fieldset v-if="step === 1">
+        <div v-if="step === 1">
             <h4>Tell us who you are:</h4>
             <div class="form-group">
-                <label  for="f1-first-name">Nome</label>
+                <label for="f1-first-name">Nome</label>
                 <input type="text" name="label" placeholder="Label..." v-model="trip.label" class="f1-first-name form-control" >
             </div>
             <div class="f1-buttons">
                 <button type="button" class="btn btn-next" @click.prevent="next()">Next</button>
             </div>
-        </fieldset>
+        </div>
 
-        <fieldset v-if="step === 2">
+        <div v-if="step === 2">
             <h4>Set up your account:</h4>
             <div v-for="(city, index) in trip.cities">
               <div class="form-group">
                   <label for="f1-email">Citt&agrave;</label>
-                  <input type="text" name="f1-email" v-model="trip.cities[index].name" placeholder="Email..." class="f1-email form-control" id="f1-email">
+                  <input type="text" name="email" v-model="trip.cities[index].name" placeholder="Email..." class="f1-email form-control" id="f1-email">
               </div>
               <div class="form-group">
-                  <label  for="f1-first-name">Dal</label>
-                  <input type="date" name="label"  v-model="trip.cities[index].from" placeholder="Label..." class="f1-first-name form-control" >
+                  <label for="f1-first-name">Dal</label>
+                  <input type="date" name="from"  v-model="trip.cities[index].from" placeholder="Label..." class="f1-first-name form-control" >
               </div>
               <div class="form-group">
-                  <label  for="f1-first-name">Al</label>
-                  <input type="date" name="label"  v-model="trip.cities[index].to" placeholder="Label..." class="f1-first-name form-control" >
+                  <label for="f1-first-name">Al</label>
+                  <input type="date" name="to"  v-model="trip.cities[index].to" placeholder="Label..." class="f1-first-name form-control" >
               </div>
             </div>
             <button class="btn btn-previous" @click.prevent="addCity()"> Add City </button>
@@ -54,15 +55,16 @@
                 <button type="button" class="btn btn-previous" @click.prevent="prev()">Previous</button>
                 <button type="button" class="btn btn-next" @click.prevent="next()">Next</button>
             </div>
-        </fieldset>
+        </div>
 
-        <fieldset v-if="step === 3">
+        <div v-if="step === 3">
             <h4>Social media profiles:</h4>
             <autocomplete
               :url="friendshipRoute"
               :classes="{ wrapper: 'form-group', input: 'f1-email form-control', list: 'data-list', item: 'data-list-item' }"
               anchor="firstname"
               label="writer"
+              :customHeaders="{ Accept : 'application/json', Authorization: 'Bearer 5af9ce0ed5c2c' }"
               :on-select="getData">
             </autocomplete>
             <div >
@@ -74,10 +76,10 @@
                 <button type="button" class="btn btn-previous" @click.prevent="prev()">Previous</button>
                 <button type="submit" class="btn btn-submit" @click.prevent="submit()">Submit</button>
             </div>
-        </fieldset>
+        </div>
     
     <pre> {{trip}} </pre>
-    </form>
+  </form>
 
     
 
@@ -104,11 +106,7 @@ import Autocomplete from 'vue2-autocomplete-js';
         }
     },
     mounted() {
-      console.log( this._props.csrf);
-
-      //this.csrf = this._props.csrf;
     },
-    /*props: ['csrf', 'submitroute'],*/
     data: () => ({
         step:1,
         classProgress: 'step-progress-1',
@@ -129,6 +127,7 @@ import Autocomplete from 'vue2-autocomplete-js';
             'f1-step': true,
           },
         ],
+        finalForm: null,
         trip:{
           label:null,
           cities: [{
@@ -163,7 +162,15 @@ import Autocomplete from 'vue2-autocomplete-js';
         this.classProgress= 'step-progress-' + this.step;
       },
       submit() {
-        alert('This is the post. Blah');
+        this.finalForm = JSON.stringify({
+          label: this.trip.label,
+          friends: this.trip.friends,
+          cities: this.trip.cities
+        });
+        this.submitForm();
+      },
+      submitForm(){
+        this.$refs.form.submit();
       },
       addCity(){
         this.trip.cities.push({

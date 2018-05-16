@@ -22,6 +22,22 @@ Vue.config.performance = true;
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('new-trip-component', require('./new-trip-component/NewTrip.vue'));
+
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
 import App from './components/App.vue';
 
 const app = new Vue({
