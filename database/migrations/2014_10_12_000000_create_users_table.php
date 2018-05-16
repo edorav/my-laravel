@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('locale');
             $table->string('currencycode');
             $table->string('gender',1);
+            $table->string('api_token');
             $table->rememberToken();
             $table->timestamps();
         });

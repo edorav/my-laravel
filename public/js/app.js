@@ -48493,13 +48493,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     friendshipRoute: {
       type: String,
       required: true
+    },
+    apiToken: {
+      type: String,
+      required: true
     }
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.customHeaders = { Accept: 'application/json', Authorization: 'Bearer ' + this.apiToken };
+  },
 
   data: function data() {
     return {
       step: 1,
+      customHeaders: null,
       classProgress: 'step-progress-1',
       steps: [{
         active: true,
@@ -48895,10 +48902,7 @@ var render = function() {
                   },
                   anchor: "firstname",
                   label: "writer",
-                  customHeaders: {
-                    Accept: "application/json",
-                    Authorization: "Bearer 5af9ce0ed5c2c"
-                  },
+                  customHeaders: _vm.customHeaders,
                   "on-select": _vm.getData
                 }
               }),

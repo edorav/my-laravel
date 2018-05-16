@@ -64,7 +64,7 @@
               :classes="{ wrapper: 'form-group', input: 'f1-email form-control', list: 'data-list', item: 'data-list-item' }"
               anchor="firstname"
               label="writer"
-              :customHeaders="{ Accept : 'application/json', Authorization: 'Bearer 5af9ce0ed5c2c' }"
+              :customHeaders="customHeaders"
               :on-select="getData">
             </autocomplete>
             <div >
@@ -103,12 +103,18 @@ import Autocomplete from 'vue2-autocomplete-js';
         friendshipRoute: {
           type: String,
           required: true
+        },
+        apiToken: {
+          type: String,
+          required: true
         }
     },
     mounted() {
+      this.customHeaders = { Accept : 'application/json', Authorization: 'Bearer ' + this.apiToken };
     },
     data: () => ({
         step:1,
+        customHeaders: null,
         classProgress: 'step-progress-1',
         steps: [
           {

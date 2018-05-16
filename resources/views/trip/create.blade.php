@@ -6,6 +6,7 @@
     csrf-token="{{ csrf_token() }}"
     submit-route="{{ route('store-trip') }}"
     friendship-route="{{ route('get-friendships-list-by-search') }}"
+    api-token="{{ Auth::user()->api_token }}"
 ></new-trip-component>
 
 <passport-clients></passport-clients>
