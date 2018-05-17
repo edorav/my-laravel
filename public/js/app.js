@@ -48388,6 +48388,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -48500,7 +48502,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    this.customHeaders = { Accept: 'application/json', Authorization: 'Bearer ' + this.apiToken };
+    this.customHeaders = {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + this.apiToken
+    };
   },
 
   data: function data() {
@@ -48509,19 +48514,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       customHeaders: null,
       classProgress: 'step-progress-1',
       steps: [{
+        // First Step
         active: true,
         'activated': false,
         'f1-step': true
       }, {
+        // Second Step
         active: false,
         'activated': false,
         'f1-step': true
       }, {
+        // Third Step
         active: false,
         'activated': false,
         'f1-step': true
       }],
-      finalForm: null,
+
       trip: {
         label: null,
         cities: [{
@@ -48541,6 +48549,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fullname: obj.firstname + ' ' + obj.lastname
       });
     },
+    addCity: function addCity() {
+      this.trip.cities.push({
+        name: null,
+        from: null,
+        to: null
+      });
+    },
     prev: function prev() {
       this.steps[this.step - 1].active = false;
       this.steps[this.step - 2].active = true;
@@ -48555,22 +48570,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.step++;
       this.classProgress = 'step-progress-' + this.step;
     },
+    getHeaders: function getHeaders() {
+      return {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + this.apiToken
+        }
+      };
+    },
     submit: function submit() {
-      this.finalForm = JSON.stringify({
-        label: this.trip.label,
-        friends: this.trip.friends,
-        cities: this.trip.cities
-      });
-      this.submitForm();
-    },
-    submitForm: function submitForm() {
-      this.$refs.form.submit();
-    },
-    addCity: function addCity() {
-      this.trip.cities.push({
-        name: null,
-        from: null,
-        to: null
+      var _this = this;
+
+      console.log(this.getHeaders());
+      axios.post(this.submitRoute, this.trip, this.getHeaders()).then(function (response) {
+        _this.form.name = '';
+        _this.form.scopes = [];
+        _this.form.errors = [];
+
+        _this.tokens.push(response.data.token);
+
+        //this.showAccessToken(response.data.accessToken);
+      }).catch(function (error) {
+        if (_typeof(error.response.data) === 'object') {
+          _this.form.errors = _.flatten(_.toArray(error.response.data.errors));
+        } else {
+          _this.form.errors = ['Something went wrong. Please try again.'];
+        }
       });
     }
   }
@@ -48584,120 +48609,254 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "form",
-    {
-      ref: "form",
-      staticClass: "f1",
-      attrs: { action: _vm.submitRoute, method: "post" }
-    },
-    [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.csrfToken,
-            expression: "csrfToken"
-          }
-        ],
-        attrs: { type: "hidden", name: "_token" },
-        domProps: { value: _vm.csrfToken },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.csrfToken = $event.target.value
-          }
+  return _c("form", { ref: "form", staticClass: "f1" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.csrfToken,
+          expression: "csrfToken"
         }
-      }),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.finalForm,
-            expression: "finalForm"
+      ],
+      attrs: { type: "hidden", name: "_token" },
+      domProps: { value: _vm.csrfToken },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
           }
-        ],
-        attrs: { type: "text", name: "final_form" },
-        domProps: { value: _vm.finalForm },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.finalForm = $event.target.value
-          }
+          _vm.csrfToken = $event.target.value
         }
-      }),
-      _vm._v(" "),
-      _c("h3", [_vm._v("Register To Our App")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Fill in the form to get instant access")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "f1-steps" }, [
-        _c("div", { staticClass: "f1-progress" }, [
-          _c("div", {
-            staticClass: "f1-progress-line",
-            class: _vm.classProgress
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { class: _vm.steps[0] }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("p", [_vm._v("about")])
-        ]),
-        _vm._v(" "),
-        _c("div", { class: _vm.steps[1] }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c("p", [_vm._v("account")])
-        ]),
-        _vm._v(" "),
-        _c("div", { class: _vm.steps[2] }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("p", [_vm._v("social")])
-        ])
+      }
+    }),
+    _vm._v(" "),
+    _c("h3", [_vm._v("Register To Our App")]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Fill in the form to get instant access")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "f1-steps" }, [
+      _c("div", { staticClass: "f1-progress" }, [
+        _c("div", { staticClass: "f1-progress-line", class: _vm.classProgress })
       ]),
       _vm._v(" "),
-      _vm.step === 1
-        ? _c("div", [
-            _c("h4", [_vm._v("Tell us who you are:")]),
+      _c("div", { class: _vm.steps[0] }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("p", [_vm._v("about")])
+      ]),
+      _vm._v(" "),
+      _c("div", { class: _vm.steps[1] }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("p", [_vm._v("account")])
+      ]),
+      _vm._v(" "),
+      _c("div", { class: _vm.steps[2] }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("p", [_vm._v("social")])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.step === 1
+      ? _c("div", [
+          _c("h4", [_vm._v("Tell us who you are:")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "f1-first-name" } }, [_vm._v("Nome")]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "f1-first-name" } }, [
-                _vm._v("Nome")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.trip.label,
-                    expression: "trip.label"
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.trip.label,
+                  expression: "trip.label"
+                }
+              ],
+              staticClass: "f1-first-name form-control",
+              attrs: { type: "text", name: "label", placeholder: "Label..." },
+              domProps: { value: _vm.trip.label },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                staticClass: "f1-first-name form-control",
-                attrs: { type: "text", name: "label", placeholder: "Label..." },
-                domProps: { value: _vm.trip.label },
+                  _vm.$set(_vm.trip, "label", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "f1-buttons" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-next",
+                attrs: { type: "button" },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.trip, "label", $event.target.value)
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.next()
                   }
                 }
-              })
-            ]),
+              },
+              [_vm._v("Next")]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.step === 2
+      ? _c(
+          "div",
+          [
+            _c("h4", [_vm._v("Set up your account:")]),
+            _vm._v(" "),
+            _vm._l(_vm.trip.cities, function(city, index) {
+              return _c("div", [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "f1-email" } }, [
+                    _vm._v("Città")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.trip.cities[index].name,
+                        expression: "trip.cities[index].name"
+                      }
+                    ],
+                    staticClass: "f1-email form-control",
+                    attrs: {
+                      type: "text",
+                      name: "email",
+                      placeholder: "Email...",
+                      id: "f1-email"
+                    },
+                    domProps: { value: _vm.trip.cities[index].name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.trip.cities[index],
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "f1-first-name" } }, [
+                    _vm._v("Dal")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.trip.cities[index].from,
+                        expression: "trip.cities[index].from"
+                      }
+                    ],
+                    staticClass: "f1-first-name form-control",
+                    attrs: {
+                      type: "date",
+                      name: "from",
+                      placeholder: "Label..."
+                    },
+                    domProps: { value: _vm.trip.cities[index].from },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.trip.cities[index],
+                          "from",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "f1-first-name" } }, [
+                    _vm._v("Al")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.trip.cities[index].to,
+                        expression: "trip.cities[index].to"
+                      }
+                    ],
+                    staticClass: "f1-first-name form-control",
+                    attrs: {
+                      type: "date",
+                      name: "to",
+                      placeholder: "Label..."
+                    },
+                    domProps: { value: _vm.trip.cities[index].to },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.trip.cities[index],
+                          "to",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-previous",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.addCity()
+                  }
+                }
+              },
+              [_vm._v(" Add City ")]
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "f1-buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-previous",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.prev()
+                    }
+                  }
+                },
+                [_vm._v("Previous")]
+              ),
+              _vm._v(" "),
               _c(
                 "button",
                 {
@@ -48713,248 +48872,80 @@ var render = function() {
                 [_vm._v("Next")]
               )
             ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.step === 2
-        ? _c(
-            "div",
-            [
-              _c("h4", [_vm._v("Set up your account:")]),
-              _vm._v(" "),
-              _vm._l(_vm.trip.cities, function(city, index) {
-                return _c("div", [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "f1-email" } }, [
-                      _vm._v("Città")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.trip.cities[index].name,
-                          expression: "trip.cities[index].name"
-                        }
-                      ],
-                      staticClass: "f1-email form-control",
-                      attrs: {
-                        type: "text",
-                        name: "email",
-                        placeholder: "Email...",
-                        id: "f1-email"
-                      },
-                      domProps: { value: _vm.trip.cities[index].name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.trip.cities[index],
-                            "name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "f1-first-name" } }, [
-                      _vm._v("Dal")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.trip.cities[index].from,
-                          expression: "trip.cities[index].from"
-                        }
-                      ],
-                      staticClass: "f1-first-name form-control",
-                      attrs: {
-                        type: "date",
-                        name: "from",
-                        placeholder: "Label..."
-                      },
-                      domProps: { value: _vm.trip.cities[index].from },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.trip.cities[index],
-                            "from",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "f1-first-name" } }, [
-                      _vm._v("Al")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.trip.cities[index].to,
-                          expression: "trip.cities[index].to"
-                        }
-                      ],
-                      staticClass: "f1-first-name form-control",
-                      attrs: {
-                        type: "date",
-                        name: "to",
-                        placeholder: "Label..."
-                      },
-                      domProps: { value: _vm.trip.cities[index].to },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.trip.cities[index],
-                            "to",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.step === 3
+      ? _c(
+          "div",
+          [
+            _c("h4", [_vm._v("Social media profiles:")]),
+            _vm._v(" "),
+            _c("autocomplete", {
+              attrs: {
+                url: _vm.friendshipRoute,
+                classes: {
+                  wrapper: "form-group",
+                  input: "f1-email form-control",
+                  list: "data-list",
+                  item: "data-list-item"
+                },
+                anchor: "firstname",
+                label: "writer",
+                customHeaders: _vm.customHeaders,
+                "on-select": _vm.getData
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              _vm._l(_vm.trip.friends, function(friend, index) {
+                return _c("ul", [
+                  _c("li", [_vm._v(" " + _vm._s(friend.fullname) + " ")])
                 ])
-              }),
-              _vm._v(" "),
+              })
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "f1-buttons" }, [
               _c(
                 "button",
                 {
                   staticClass: "btn btn-previous",
+                  attrs: { type: "button" },
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      _vm.addCity()
+                      _vm.prev()
                     }
                   }
                 },
-                [_vm._v(" Add City ")]
+                [_vm._v("Previous")]
               ),
-              _vm._v(" "),
-              _c("div", { staticClass: "f1-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-previous",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.prev()
-                      }
-                    }
-                  },
-                  [_vm._v("Previous")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-next",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.next()
-                      }
-                    }
-                  },
-                  [_vm._v("Next")]
-                )
-              ])
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.step === 3
-        ? _c(
-            "div",
-            [
-              _c("h4", [_vm._v("Social media profiles:")]),
-              _vm._v(" "),
-              _c("autocomplete", {
-                attrs: {
-                  url: _vm.friendshipRoute,
-                  classes: {
-                    wrapper: "form-group",
-                    input: "f1-email form-control",
-                    list: "data-list",
-                    item: "data-list-item"
-                  },
-                  anchor: "firstname",
-                  label: "writer",
-                  customHeaders: _vm.customHeaders,
-                  "on-select": _vm.getData
-                }
-              }),
               _vm._v(" "),
               _c(
-                "div",
-                _vm._l(_vm.trip.friends, function(friend, index) {
-                  return _c("ul", [
-                    _c("li", [_vm._v(" " + _vm._s(friend.fullname) + " ")])
-                  ])
-                })
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "f1-buttons" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-previous",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.prev()
-                      }
+                "button",
+                {
+                  staticClass: "btn btn-submit",
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.submit()
                     }
-                  },
-                  [_vm._v("Previous")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-submit",
-                    attrs: { type: "submit" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.submit()
-                      }
-                    }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("pre", [_vm._v(" " + _vm._s(_vm.trip) + " ")])
-    ]
-  )
+                  }
+                },
+                [_vm._v("Submit")]
+              )
+            ])
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("pre", [_vm._v(" " + _vm._s(_vm.trip) + " ")])
+  ])
 }
 var staticRenderFns = [
   function() {

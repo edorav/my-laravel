@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trip;
 
 class TripController extends Controller
 {
@@ -40,6 +41,10 @@ class TripController extends Controller
     {
         //
         $input = $request->all();
+
+        return Trip::create([
+            'label' => $request['label'],
+        ]);
         var_dump($input);
     }
 

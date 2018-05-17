@@ -110,7 +110,10 @@ import Autocomplete from 'vue2-autocomplete-js';
         }
     },
     mounted() {
-      this.customHeaders = { Accept : 'application/json', Authorization: 'Bearer ' + this.apiToken };
+      this.customHeaders = { 
+          Accept : 'application/json', 
+          Authorization: 'Bearer ' + this.apiToken 
+      };
     },
     data: () => ({
         step:1,
@@ -181,8 +184,18 @@ import Autocomplete from 'vue2-autocomplete-js';
         this.classProgress= 'step-progress-' + this.step;
       },
 
+      getHeaders(){
+        return {
+          headers :{ 
+            Accept : 'application/json', 
+            Authorization: 'Bearer ' + this.apiToken 
+          }
+        }
+      },
+
       submit() {
-        axios.post( this.submitRoute , this.trip )
+        console.log( this.getHeaders());
+        axios.post( this.submitRoute , this.trip , this.getHeaders() )
                 .then(response => {
                     this.form.name = '';
                     this.form.scopes = [];

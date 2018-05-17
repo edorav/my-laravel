@@ -18,7 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:api'],'prefix' => 'trip'], function(){
-    //Route::get('/create', 'TripController@create')->name('create-trip');
-    //Route::post('/', 'TripController@store')->name('store-trip');
-    Route::get('/search', 'FriendshipController@showLoggedUserFriends')->name('get-friendships-list-by-search');
+    Route::get('/search', 'FriendshipController@showLoggedUserFriends')->name('api-get-friendships-list-by-search');
+});
+
+Route::group(['middleware' => ['auth:api'],'prefix' => 'trip'], function(){
+    Route::post('/', 'TripController@store')->name('api-store-trip');
 });
