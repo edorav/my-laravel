@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class TripUser extends Model
 {
     //
     /**
@@ -13,6 +13,11 @@ class City extends Model
      * @var array
      */
     protected $fillable = [
-        'name','country','latitude','longitude'
+        'trip_id', 'user_id'
     ];
+
+    public function trip() 
+    {
+        return $this->belongsTo('App\Models\Trip');
+    }
 }

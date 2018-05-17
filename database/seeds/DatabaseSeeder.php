@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             UserAgencySeeder::class,
             TripSeeder::class,
             TripDaySeeder::class,
-            UserTripSeeder::class,
+            UserTripsSeeder::class,
             HotelSeeder::class,
             CommentSeeder::class
         ]);

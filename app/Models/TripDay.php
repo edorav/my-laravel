@@ -13,7 +13,7 @@ class TripDay extends Model
      * @var array
      */
     protected $fillable = [
-        'from' , 'to' 
+        'from' , 'to' ,'trip_id', 'city_id'
     ];
 
     public function trip() 

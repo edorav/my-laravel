@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trip;
+use App\Models\TripDay;
+use App\Models\TripUser;
+use App\Models\City;
+use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
@@ -42,10 +46,46 @@ class TripController extends Controller
         //
         $input = $request->all();
 
-        return Trip::create([
+        $trip = Trip::create([
             'label' => $request['label'],
         ]);
-        var_dump($input);
+
+        foreach($request->cities as $tripDay){
+
+            $city = City::firstOrCreate([
+                    'name' => $tripDay['name']
+                ],
+                [
+                    'name' => $tripDay['name'],
+                    'country' => 'France',
+                    'latitude'=> 52.520007,
+                    'longitude'=> 13.404954
+                ]
+            );
+
+            TripDay::create([
+                'city_id' => $city->id,
+                'trip_id' => $trip->id,
+                'from'=>$tripDay['from'],
+                'to'=>$tripDay['to']
+            ]);
+
+        }
+
+        foreach($request->friends as $people){
+
+            TripUser::create([
+                'user_id' => $people['id'],
+                'trip_id' => $trip->id,
+            ]);
+        }
+
+        TripUser::create([
+            'user_id' => Auth::user()->id,
+            'trip_id' => $trip->id,
+        ]);
+ 
+        return $trip;
     }
 
     /**
