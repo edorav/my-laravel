@@ -1,8 +1,8 @@
 <template>
 
-<form ref="form" :action="submitRoute" method="post" class="f1">
+<form ref="form" class="f1">
     <input type="hidden" name="_token" v-model="csrfToken">
-    <input type="text" name="final_form" v-model="finalForm">
+    
     <h3>Register To Our App</h3>
     <p>Fill in the form to get instant access</p>
     <div class="f1-steps">
@@ -118,22 +118,25 @@ import Autocomplete from 'vue2-autocomplete-js';
         classProgress: 'step-progress-1',
         steps: [
           {
+            // First Step
             active: true,
             'activated': false,
             'f1-step': true,
           },
           {
+            // Second Step
             active: false,
             'activated': false,
             'f1-step': true,
           },
           {
+            // Third Step
             active: false,
             'activated': false,
             'f1-step': true,
           },
         ],
-        finalForm: null,
+
         trip:{
           label:null,
           cities: [{
@@ -153,6 +156,15 @@ import Autocomplete from 'vue2-autocomplete-js';
         });
 
       },
+
+      addCity(){
+        this.trip.cities.push({
+          name: null,
+          from: null,
+          to: null,
+        })
+      },
+
       prev() {
         this.steps[this.step - 1].active = false;
         this.steps[this.step - 2].active = true;
@@ -160,6 +172,7 @@ import Autocomplete from 'vue2-autocomplete-js';
         this.step--;
         this.classProgress= 'step-progress-' + this.step;
       },
+
       next() {
         this.steps[this.step].active = true;
         this.steps[this.step - 1 ].active = false;
@@ -167,24 +180,27 @@ import Autocomplete from 'vue2-autocomplete-js';
         this.step++;
         this.classProgress= 'step-progress-' + this.step;
       },
+
       submit() {
-        this.finalForm = JSON.stringify({
-          label: this.trip.label,
-          friends: this.trip.friends,
-          cities: this.trip.cities
-        });
-        this.submitForm();
-      },
-      submitForm(){
-        this.$refs.form.submit();
-      },
-      addCity(){
-        this.trip.cities.push({
-          name: null,
-          from: null,
-          to: null,
-        })
+        axios.post( this.submitRoute , this.trip )
+                .then(response => {
+                    this.form.name = '';
+                    this.form.scopes = [];
+                    this.form.errors = [];
+
+                    this.tokens.push(response.data.token);
+
+                    //this.showAccessToken(response.data.accessToken);
+                })
+                .catch(error => {
+                    if (typeof error.response.data === 'object') {
+                        this.form.errors = _.flatten(_.toArray(error.response.data.errors));
+                    } else {
+                        this.form.errors = ['Something went wrong. Please try again.'];
+                    }
+                });
       }
+      
     }
 }
 </script>

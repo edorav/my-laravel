@@ -34,7 +34,7 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('/edit', 'UserController@update')->name('edit-profile');
     Route::get('/my-trips', 'UserController@showMyTrip')->name('mytrips');
 });
-
+/*
 Route::group(['prefix' => 'agency'], function(){
     Route::get('/', 'AgencyController@index')->name('index-agency');
     Route::get('/create', 'AgencyController@create')->name('create-agency');
@@ -46,15 +46,18 @@ Route::group(['prefix' => 'roles'], function(){
     Route::get('/create', 'AgencyController@create')->name('create-agency');
     Route::post('/', 'AgencyController@store')->name('store-agency');
 });
+*/
 
 Route::group(['prefix' => 'friendship'], function(){
     Route::get('/create', 'FriendshipController@create')->name('create-friendship');
     Route::post('/', 'FriendshipController@store')->name('store-friendship');
 });
 
+/*
 Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], function () {
     Route::get('/', 'RoleController@index')->name('index-agency');
 });
+*/
 
 Route::group(['prefix' => 'trip'], function(){
     Route::get('/create', 'TripController@create')->name('create-trip');
