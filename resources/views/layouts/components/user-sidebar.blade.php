@@ -2,7 +2,7 @@
     <div class="card card-user" >
         <img class="card-img-top" src="{{ asset( 'img/iceland.jpg') }}" alt="Card image cap">
         <a href="#">
-        <img class="avatar" src="{{ asset( 'img/avatar.png') }}" />
+        <img class="avatar" src="{{ Auth::user()->getProfilePicture()}}" />
         </a>
         <div class="card-body">
             <h5 class="card-title">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h5>

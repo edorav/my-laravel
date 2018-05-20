@@ -51,10 +51,8 @@ class UserController extends Controller
      */
     public function show()
     {
-
-        $loggedUserAgencies = Auth::user()->agencies;
         
-        return view('auth.myprofile' , compact('loggedUserAgencies'));
+        return view('auth.myprofile' );
     }
 
     /**
@@ -80,30 +78,35 @@ class UserController extends Controller
         $loggedUser = Auth::user();
 
         if ( $request->file('picture') ){
+ 
             $file = $request->file('picture');
             $folderId = uniqid();
-            $directory = 'app/public/users/'. $folderId . DIRECTORY_SEPARATOR;
+            $directory = 'app/public/'. $folderId . DIRECTORY_SEPARATOR;
  
             mkdir( storage_path( $directory) );
 
-            $pathOriginal = storage_path( $directory . 'default' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
-            $pathMiddle = storage_path( $directory . '300x300' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
-            $pathSmall  = storage_path( $directory . '150x150' . '.' . pathinfo($file->getClientOriginalName())['extension'] );
-            $imgResized = Image::make($file)->save($pathOriginal);
-            $imgResized = Image::make($file)->crop(300, 300)->save($pathMiddle);
-            $imgResized = Image::make($file)->crop(150, 150)->save($pathSmall);
+            $path = storage_path( $directory . 'default' . '.jpg'  );
+            $imgResized = Image::make($file)->save($path);
     
             $loggedUser->picture = $folderId;
         }
-        
+    
         $loggedUser->firstname = $request->firstname;
         $loggedUser->lastname = $request->lastname;
-        $loggedUser->cellnumber = $request->cellnumber;
-        $loggedUser->locale = $request->locale;
-        $loggedUser->currencycode = $request->currencycode;
+
+        //$loggedUser->cellnumber = $request->cellnumber;
+        //$loggedUser->locale = $request->locale;
+        //$loggedUser->currencycode = $request->currencycode;
         $loggedUser->save();
 
-        return back();
+        if ( request()->wantsJson() ){
+            return response()->json([
+                'status' => 'ok'
+            ]);
+        }else{
+            return back();
+        }
+        
     }
 
 

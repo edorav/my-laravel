@@ -33,6 +33,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getProfilePicture(){
+        return asset('storage/' . $this->picture . '/default.jpg');
+    }
+
     /**
      * The agencies that belong to the user.
      */

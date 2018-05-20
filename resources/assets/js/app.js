@@ -18,27 +18,11 @@ Vue.config.performance = true;
  */
 
 //https://vuejsdevelopers.com/2018/02/05/vue-laravel-crud/
-//console.log('called');
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('new-trip-component', require('./components/NewTrip.vue'));
 
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue')
-);
+Vue.component('my-profile', require('./components/MyProfile.vue'));
 
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue')
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue')
-);
-
-import App from './components/App.vue';
 
 const app = new Vue({
     el: '#app'
