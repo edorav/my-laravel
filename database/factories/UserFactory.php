@@ -14,7 +14,6 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
-    $sex = ['F','M'];
 
     return [
         'firstname' => $faker->firstname,
@@ -25,7 +24,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'cellnumber' => $faker->phoneNumber,
         'locale' => $faker->locale,
         'currencycode' => $faker->currencyCode,
-        'gender' => $sex[rand(0,1)],
         'api_token' => uniqid()
     ];
 });

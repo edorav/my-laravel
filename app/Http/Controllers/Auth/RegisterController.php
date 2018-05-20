@@ -69,9 +69,9 @@ class RegisterController extends Controller
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'cellnumber' => $data['cellnumber'],
-            'locale' => $data['locale'],
-            'currencycode' => $data['currencycode']
+            'locale' => \App::getLocale(),
+            'currencycode' => 'eur',
+            'api_token' => uniqid()
         ]);
 
         // 1 = writer id role

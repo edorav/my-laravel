@@ -21,7 +21,7 @@ Vue.config.performance = true;
 //console.log('called');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('new-trip-component', require('./new-trip-component/NewTrip.vue'));
+Vue.component('new-trip-component', require('./components/NewTrip.vue'));
 
 Vue.component(
     'passport-clients',

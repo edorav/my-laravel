@@ -39,6 +39,14 @@
             <div v-for="(city, index) in trip.cities">
               <div class="form-group">
                   <label for="f1-email">Citt&agrave;</label>
+                  <vue-google-autocomplete
+                      id="map"
+                      classname="form-control"
+                      placeholder="Start typing"
+                      v-on:placechanged="getAddressData"
+                      types="(cities)"
+                  >
+                  </vue-google-autocomplete>
                   <input type="text" name="email" v-model="trip.cities[index].name" placeholder="Email..." class="f1-email form-control" id="f1-email">
               </div>
               <div class="form-group">
@@ -88,9 +96,10 @@
 <script>
 
 import Autocomplete from 'vue2-autocomplete-js';
+import VueGoogleAutocomplete from 'vue-google-autocomplete';
 
   export default{
-    components: { Autocomplete },
+    components: { Autocomplete , VueGoogleAutocomplete },
     props: {
         csrfToken: {
           type: String,
@@ -166,6 +175,10 @@ import Autocomplete from 'vue2-autocomplete-js';
           from: null,
           to: null,
         })
+      },
+
+      getAddressData( addressData, placeResultData, id ) {
+            this.form.address = addressData;
       },
 
       prev() {

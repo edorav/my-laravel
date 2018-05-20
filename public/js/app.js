@@ -611,7 +611,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(49)
+var listToStyles = __webpack_require__(52)
 
 /*
 type StyleObject = {
@@ -15033,7 +15033,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(72);
+module.exports = __webpack_require__(75);
 
 
 /***/ }),
@@ -15042,7 +15042,7 @@ module.exports = __webpack_require__(72);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App_vue__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_App_vue__);
 
 /**
@@ -15069,11 +15069,11 @@ Vue.config.performance = true;
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('new-trip-component', __webpack_require__(43));
 
-Vue.component('passport-clients', __webpack_require__(46));
+Vue.component('passport-clients', __webpack_require__(49));
 
-Vue.component('passport-authorized-clients', __webpack_require__(52));
+Vue.component('passport-authorized-clients', __webpack_require__(55));
 
-Vue.component('passport-personal-access-tokens', __webpack_require__(57));
+Vue.component('passport-personal-access-tokens', __webpack_require__(60));
 
 
 
@@ -48342,7 +48342,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(48)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48359,7 +48359,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/new-trip-component/NewTrip.vue"
+Component.options.__file = "resources/assets/js/components/NewTrip.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -48368,9 +48368,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-35fa4d8a", Component.options)
+    hotAPI.createRecord("data-v-33873904", Component.options)
   } else {
-    hotAPI.reload("data-v-35fa4d8a", Component.options)
+    hotAPI.reload("data-v-33873904", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48388,6 +48388,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_google_autocomplete__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_google_autocomplete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_google_autocomplete__);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 //
@@ -48477,12 +48479,21 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: { Autocomplete: __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js___default.a },
+  components: { Autocomplete: __WEBPACK_IMPORTED_MODULE_0_vue2_autocomplete_js___default.a, VueGoogleAutocomplete: __WEBPACK_IMPORTED_MODULE_1_vue_google_autocomplete___default.a },
   props: {
     csrfToken: {
       type: String,
@@ -48556,6 +48567,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         to: null
       });
     },
+    getAddressData: function getAddressData(addressData, placeResultData, id) {
+      this.form.address = addressData;
+    },
     prev: function prev() {
       this.steps[this.step - 1].active = false;
       this.steps[this.step - 2].active = true;
@@ -48603,6 +48617,521 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 /* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(46)
+/* template */
+var __vue_template__ = __webpack_require__(47)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules/vue-google-autocomplete/src/VueGoogleAutocomplete.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a72a90ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-a72a90ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var ADDRESS_COMPONENTS = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    administrative_area_level_2: 'county',
+    country: 'long_name',
+    postal_code: 'short_name'
+};
+
+var CITIES_TYPE = ['locality', 'administrative_area_level_3'];
+var REGIONS_TYPE = ['locality', 'sublocality', 'postal_code', 'country', 'administrative_area_level_1', 'administrative_area_level_2'];
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'VueGoogleAutocomplete',
+
+    props: {
+        id: {
+            type: String,
+            required: true
+        },
+
+        classname: String,
+
+        placeholder: {
+            type: String,
+            default: 'Start typing'
+        },
+
+        types: {
+            type: String,
+            default: 'address'
+        },
+
+        country: {
+            type: [String, Array],
+            default: null
+        },
+
+        enableGeolocation: {
+            type: Boolean,
+            default: false
+        },
+
+        geolocationOptions: {
+            type: Object,
+            default: null
+        }
+    },
+
+    data: function data() {
+        return {
+            /**
+             * The Autocomplete object.
+             *
+             * @type {Autocomplete}
+             * @link https://developers.google.com/maps/documentation/javascript/reference#Autocomplete
+             */
+            autocomplete: null,
+
+            /**
+             * Autocomplete input text
+             * @type {String}
+             */
+            autocompleteText: '',
+
+            geolocation: {
+                /**
+                 * Google Geocoder Objet
+                 * @type {Geocoder}
+                 * @link https://developers.google.com/maps/documentation/javascript/reference#Geocoder
+                 */
+                geocoder: null,
+
+                /**
+                 * Filled after geolocate result
+                 * @type {Coordinates}
+                 * @link https://developer.mozilla.org/en-US/docs/Web/API/Coordinates
+                 */
+                loc: null,
+
+                /**
+                 * Filled after geolocate result
+                 * @type {Position}
+                 * @link https://developer.mozilla.org/en-US/docs/Web/API/Position
+                 */
+                position: null
+            }
+        };
+    },
+
+
+    watch: {
+        autocompleteText: function autocompleteText(newVal, oldVal) {
+            this.$emit('inputChange', { newVal: newVal, oldVal: oldVal }, this.id);
+        },
+        country: function country(newVal, oldVal) {
+            this.autocomplete.setComponentRestrictions({
+                country: this.country === null ? [] : this.country
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        var options = {};
+
+        if (this.types) {
+            options.types = [this.types];
+        }
+
+        if (this.country) {
+            options.componentRestrictions = {
+                country: this.country
+            };
+        }
+
+        this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.id), options);
+
+        this.autocomplete.addListener('place_changed', this.onPlaceChanged);
+    },
+
+    methods: {
+        /**
+         * When a place changed
+         */
+        onPlaceChanged: function onPlaceChanged() {
+            var place = this.autocomplete.getPlace();
+
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                this.$emit('no-results-found', place, this.id);
+                return;
+            }
+
+            if (place.address_components !== undefined) {
+                // return returnData object and PlaceResult object
+                this.$emit('placechanged', this.formatResult(place), place, this.id);
+
+                // update autocompleteText then emit change event
+                this.autocompleteText = document.getElementById(this.id).value;
+                this.onChange();
+            }
+        },
+
+
+        /**
+         * When the input gets focus
+         */
+        onFocus: function onFocus() {
+            this.biasAutocompleteLocation();
+            this.$emit('focus');
+        },
+
+
+        /**
+         * When the input loses focus
+         */
+        onBlur: function onBlur() {
+            this.$emit('blur');
+        },
+
+
+        /**
+         * When the input got changed
+         */
+        onChange: function onChange() {
+            this.$emit('change', this.autocompleteText);
+        },
+
+
+        /**
+         * When a key gets pressed
+         * @param  {Event} event A keypress event
+         */
+        onKeyPress: function onKeyPress(event) {
+            this.$emit('keypress', event);
+        },
+
+
+        /**
+         * When a keyup occurs
+         * @param  {Event} event A keyup event
+         */
+        onKeyUp: function onKeyUp(event) {
+            this.$emit('keyup', event);
+        },
+
+
+        /**
+         * Clear the input
+         */
+        clear: function clear() {
+            this.autocompleteText = '';
+        },
+
+
+        /**
+         * Focus the input
+         */
+        focus: function focus() {
+            this.$refs.autocomplete.focus();
+        },
+
+
+        /**
+         * Blur the input
+         */
+        blur: function blur() {
+            this.$refs.autocomplete.blur();
+        },
+
+
+        /**
+         * Update the value of the input
+         * @param  {String} value
+         */
+        update: function update(value) {
+            this.autocompleteText = value;
+        },
+
+
+        /**
+         * Update the coordinates of the input
+         * @param  {Coordinates} value
+         */
+        updateCoordinates: function updateCoordinates(value) {
+            var _this = this;
+
+            if (!value && !(value.lat || value.lng)) return;
+            if (!this.geolocation.geocoder) this.geolocation.geocoder = new google.maps.Geocoder();
+            this.geolocation.geocoder.geocode({ 'location': value }, function (results, status) {
+                if (status === 'OK') {
+                    results = _this.filterGeocodeResultTypes(results);
+                    if (results[0]) {
+                        _this.$emit('placechanged', _this.formatResult(results[0]), results[0], _this.id);
+                        _this.update(results[0].formatted_address);
+                    } else {
+                        _this.$emit('error', 'no result for provided coordinates');
+                    }
+                } else {
+                    _this.$emit('error', 'error getting address from coords');
+                }
+            });
+        },
+
+
+        /**
+         * Update location based on navigator geolocation
+         */
+        geolocate: function geolocate() {
+            var _this2 = this;
+
+            this.updateGeolocation(function (geolocation, position) {
+                _this2.updateCoordinates(geolocation);
+            });
+        },
+
+
+        /**
+         * Update internal location from navigator geolocation
+         * @param  {Function} (geolocation, position)
+         */
+        updateGeolocation: function updateGeolocation() {
+            var _this3 = this;
+
+            var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            if (navigator.geolocation) {
+                var options = {};
+                if (this.geolocationOptions) Object.assign(options, this.geolocationOptions);
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    _this3.geolocation.loc = geolocation;
+                    _this3.geolocation.position = position;
+
+                    if (callback) callback(geolocation, position);
+                }, function (err) {
+                    _this3.$emit('error', 'Cannot get Coordinates from navigator', err);
+                }, options);
+            }
+        },
+
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        biasAutocompleteLocation: function biasAutocompleteLocation() {
+            var _this4 = this;
+
+            if (this.enableGeolocation) {
+                this.updateGeolocation(function (geolocation, position) {
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    _this4.autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        },
+
+
+        /**
+         * Format result from Geo google APIs
+         * @param place
+         * @returns {{formatted output}}
+         */
+        formatResult: function formatResult(place) {
+            var returnData = {};
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+
+                if (ADDRESS_COMPONENTS[addressType]) {
+                    var val = place.address_components[i][ADDRESS_COMPONENTS[addressType]];
+                    returnData[addressType] = val;
+                }
+            }
+
+            returnData['latitude'] = place.geometry.location.lat();
+            returnData['longitude'] = place.geometry.location.lng();
+            return returnData;
+        },
+
+
+        /**
+         * Extract configured types out of raw result as
+         * Geocode API does not allow to do it
+         * @param results
+         * @returns {GeocoderResult}
+         * @link https://developers.google.com/maps/documentation/javascript/reference#GeocoderResult
+         */
+        filterGeocodeResultTypes: function filterGeocodeResultTypes(results) {
+            if (!results || !this.types) return results;
+            var output = [];
+            var types = [this.types];
+            if (types.includes('(cities)')) types = types.concat(CITIES_TYPE);
+            if (types.includes('(regions)')) types = types.concat(REGIONS_TYPE);
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var r = _step.value;
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = r.types[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var t = _step2.value;
+
+                            if (types.includes(t)) {
+                                output.push(r);
+                                break;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return output;
+        }
+    }
+});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.autocompleteText,
+        expression: "autocompleteText"
+      }
+    ],
+    ref: "autocomplete",
+    class: _vm.classname,
+    attrs: { type: "text", id: _vm.id, placeholder: _vm.placeholder },
+    domProps: { value: _vm.autocompleteText },
+    on: {
+      focus: function($event) {
+        _vm.onFocus()
+      },
+      blur: function($event) {
+        _vm.onBlur()
+      },
+      change: _vm.onChange,
+      keypress: _vm.onKeyPress,
+      keyup: _vm.onKeyUp,
+      input: function($event) {
+        if ($event.target.composing) {
+          return
+        }
+        _vm.autocompleteText = $event.target.value
+      }
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a72a90ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48716,42 +49245,57 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.trip.cities, function(city, index) {
               return _c("div", [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "f1-email" } }, [
-                    _vm._v("Città")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.trip.cities[index].name,
-                        expression: "trip.cities[index].name"
-                      }
-                    ],
-                    staticClass: "f1-email form-control",
-                    attrs: {
-                      type: "text",
-                      name: "email",
-                      placeholder: "Email...",
-                      id: "f1-email"
-                    },
-                    domProps: { value: _vm.trip.cities[index].name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "f1-email" } }, [
+                      _vm._v("Città")
+                    ]),
+                    _vm._v(" "),
+                    _c("vue-google-autocomplete", {
+                      attrs: {
+                        id: "map",
+                        classname: "form-control",
+                        placeholder: "Start typing",
+                        types: "(cities)"
+                      },
+                      on: { placechanged: _vm.getAddressData }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.trip.cities[index].name,
+                          expression: "trip.cities[index].name"
                         }
-                        _vm.$set(
-                          _vm.trip.cities[index],
-                          "name",
-                          $event.target.value
-                        )
+                      ],
+                      staticClass: "f1-email form-control",
+                      attrs: {
+                        type: "text",
+                        name: "email",
+                        placeholder: "Email...",
+                        id: "f1-email"
+                      },
+                      domProps: { value: _vm.trip.cities[index].name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.trip.cities[index],
+                            "name",
+                            $event.target.value
+                          )
+                        }
                       }
-                    }
-                  })
-                ]),
+                    })
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { for: "f1-first-name" } }, [
@@ -48978,24 +49522,24 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-35fa4d8a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-33873904", module.exports)
   }
 }
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(47)
+  __webpack_require__(50)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(50)
+var __vue_script__ = __webpack_require__(53)
 /* template */
-var __vue_template__ = __webpack_require__(51)
+var __vue_template__ = __webpack_require__(54)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49034,13 +49578,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 47 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49060,7 +49604,7 @@ if(false) {
 }
 
 /***/ }),
-/* 48 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -49074,7 +49618,7 @@ exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports) {
 
 /**
@@ -49107,7 +49651,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49471,7 +50015,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50032,19 +50576,19 @@ if (false) {
 }
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(53)
+  __webpack_require__(56)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(56)
+var __vue_template__ = __webpack_require__(59)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50083,13 +50627,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(54);
+var content = __webpack_require__(57);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50109,7 +50653,7 @@ if(false) {
 }
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -50123,7 +50667,7 @@ exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50243,7 +50787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50352,19 +50896,19 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(61)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(61)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50403,13 +50947,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(59);
+var content = __webpack_require__(62);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50429,7 +50973,7 @@ if(false) {
 }
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -50443,7 +50987,7 @@ exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50765,7 +51309,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51143,19 +51687,19 @@ if (false) {
 }
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(63)
+  __webpack_require__(66)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(65)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51194,13 +51738,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(64);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51220,7 +51764,7 @@ if(false) {
 }
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -51234,12 +51778,12 @@ exports.push([module.i, "\n#app {\n    margin-left: 1em;\n}\n.heading h1 {\n    
 
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Crud_vue__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Crud_vue__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Crud_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Crud_vue__);
 //
 //
@@ -51341,19 +51885,19 @@ function Crud(_ref) {
 });
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(67)
+  __webpack_require__(70)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(69)
+var __vue_script__ = __webpack_require__(72)
 /* template */
-var __vue_template__ = __webpack_require__(70)
+var __vue_template__ = __webpack_require__(73)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51392,13 +51936,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(68);
+var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51418,7 +51962,7 @@ if(false) {
 }
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -51432,7 +51976,7 @@ exports.push([module.i, "\n.crud {\n    display: -webkit-box;\n    display: -ms-
 
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51481,7 +52025,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51529,7 +52073,7 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51589,7 +52133,7 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
