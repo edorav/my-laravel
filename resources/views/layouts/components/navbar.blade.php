@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top  bg-primary">
+<nav class="navbar navbar-expand-lg fixed-top  bg-primary  navbar-light">
     <a class="navbar-brand" href="{{ url('/') }}">
         <img src="{{ asset( 'img/brand.png') }}" />
     </a>
@@ -13,7 +13,7 @@
         </ul>
 
         <!-- Right Side Of Navbar -->
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto navbar-right">
             <!-- Authentication Links -->
             @guest
                 <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
@@ -21,7 +21,7 @@
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <img class="header-avatar" src="{{ asset( 'img/avatar.png') }}" />{{ Auth::user()->firstname }} <span class="caret"></span>
+                        <img class="header-avatar" src="{{ Auth::user()->getProfilePicture()}}" />{{ Auth::user()->firstname }} <span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -42,3 +42,4 @@
         </ul>
     </div>
 </nav>
+

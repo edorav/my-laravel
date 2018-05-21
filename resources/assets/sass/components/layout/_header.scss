@@ -15,6 +15,10 @@
     color: $navbar-links;
 }
 
+#navbarSupportedContent{
+    background-color: $primary;
+}
+
 .navbar-brand img{
     width: 85px;
 }
@@ -31,3 +35,12 @@
 .main-content{
     margin-top: 60px;
 }
+
+@media(max-width:576px){
+   /* .navbar a{
+        display: none;
+    }*/
+}
+
+
+

@@ -14728,9 +14728,8 @@ module.exports = __webpack_require__(56);
 
 /***/ }),
 /* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14751,6 +14750,7 @@ Vue.config.performance = true;
  */
 
 //https://vuejsdevelopers.com/2018/02/05/vue-laravel-crud/
+
 
 Vue.component('new-trip-component', __webpack_require__(41));
 
@@ -48142,30 +48142,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -48189,6 +48165,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     apiToken: {
       type: String,
       required: true
+    },
+    tripParent: {
+      type: Object,
+      required: true
     }
   },
   mounted: function mounted() {
@@ -48202,33 +48182,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return {
       step: 1,
       customHeaders: null,
-      classProgress: 'step-progress-1',
-      steps: [{
-        // First Step
-        active: true,
-        'activated': false,
-        'f1-step': true
-      }, {
-        // Second Step
-        active: false,
-        'activated': false,
-        'f1-step': true
-      }, {
-        // Third Step
-        active: false,
-        'activated': false,
-        'f1-step': true
-      }],
 
-      trip: {
-        label: null,
-        cities: [{
-          name: null,
-          from: null,
-          to: null
-        }],
-        friends: []
-      }
+      input: {
+        city: {},
+        from: null,
+        to: null
+      },
+
+      tripDay: []
+
     };
   },
   methods: {
@@ -48239,15 +48201,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         fullname: obj.firstname + ' ' + obj.lastname
       });
     },
-    addCity: function addCity() {
-      this.trip.cities.push({
-        name: null,
-        from: null,
-        to: null
-      });
+    addTripDay: function addTripDay() {
+      this.tripDay.push(this.input);
     },
     getAddressData: function getAddressData(addressData, placeResultData, id) {
-      this.form.address = addressData;
+      this.input.city = addressData;
     },
     prev: function prev() {
       this.steps[this.step - 1].active = false;
@@ -48839,216 +48797,82 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c("h3", [_vm._v("Register To Our App")]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Fill in the form to get instant access")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "f1-steps" }, [
-      _c("div", { staticClass: "f1-progress" }, [
-        _c("div", { staticClass: "f1-progress-line", class: _vm.classProgress })
-      ]),
-      _vm._v(" "),
-      _c("div", { class: _vm.steps[0] }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("p", [_vm._v("about")])
-      ]),
-      _vm._v(" "),
-      _c("div", { class: _vm.steps[1] }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("p", [_vm._v("account")])
-      ]),
-      _vm._v(" "),
-      _c("div", { class: _vm.steps[2] }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("p", [_vm._v("social")])
-      ])
-    ]),
-    _vm._v(" "),
     _vm.step === 1
-      ? _c("div", [
-          _c("h4", [_vm._v("Tell us who you are:")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "f1-first-name" } }, [_vm._v("Nome")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.trip.label,
-                  expression: "trip.label"
-                }
-              ],
-              staticClass: "f1-first-name form-control",
-              attrs: { type: "text", name: "label", placeholder: "Label..." },
-              domProps: { value: _vm.trip.label },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.trip, "label", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "f1-buttons" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-next",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.next()
-                  }
-                }
-              },
-              [_vm._v("Next")]
-            )
-          ])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.step === 2
       ? _c(
           "div",
           [
-            _c("h4", [_vm._v("Set up your account:")]),
+            _c("h4", [_vm._v("Set Cities:")]),
             _vm._v(" "),
-            _vm._l(_vm.trip.cities, function(city, index) {
-              return _c("div", [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("label", { attrs: { for: "f1-email" } }, [
-                      _vm._v("Città")
-                    ]),
-                    _vm._v(" "),
-                    _c("vue-google-autocomplete", {
-                      attrs: {
-                        id: "map",
-                        classname: "form-control",
-                        placeholder: "Start typing",
-                        types: "(cities)"
-                      },
-                      on: { placechanged: _vm.getAddressData }
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.trip.cities[index].name,
-                          expression: "trip.cities[index].name"
-                        }
-                      ],
-                      staticClass: "f1-email form-control",
-                      attrs: {
-                        type: "text",
-                        name: "email",
-                        placeholder: "Email...",
-                        id: "f1-email"
-                      },
-                      domProps: { value: _vm.trip.cities[index].name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.trip.cities[index],
-                            "name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "f1-first-name" } }, [
-                    _vm._v("Dal")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.trip.cities[index].from,
-                        expression: "trip.cities[index].from"
-                      }
-                    ],
-                    staticClass: "f1-first-name form-control",
-                    attrs: {
-                      type: "date",
-                      name: "from",
-                      placeholder: "Label..."
-                    },
-                    domProps: { value: _vm.trip.cities[index].from },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.trip.cities[index],
-                          "from",
-                          $event.target.value
-                        )
-                      }
+            _c("label", { attrs: { for: "f1-email" } }, [_vm._v("Città")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("vue-google-autocomplete", {
+                  attrs: {
+                    id: "map",
+                    classname: "form-control",
+                    placeholder: "Start typing",
+                    types: "(cities)"
+                  },
+                  on: { placechanged: _vm.getAddressData }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "f1-first-name" } }, [_vm._v("Dal")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.input.from,
+                    expression: "input.from"
+                  }
+                ],
+                staticClass: "f1-first-name form-control",
+                attrs: { type: "date", name: "from", placeholder: "Label..." },
+                domProps: { value: _vm.input.from },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "f1-first-name" } }, [
-                    _vm._v("Al")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.trip.cities[index].to,
-                        expression: "trip.cities[index].to"
-                      }
-                    ],
-                    staticClass: "f1-first-name form-control",
-                    attrs: {
-                      type: "date",
-                      name: "to",
-                      placeholder: "Label..."
-                    },
-                    domProps: { value: _vm.trip.cities[index].to },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.trip.cities[index],
-                          "to",
-                          $event.target.value
-                        )
-                      }
+                    _vm.$set(_vm.input, "from", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "f1-first-name" } }, [_vm._v("Al")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.input.to,
+                    expression: "input.to"
+                  }
+                ],
+                staticClass: "f1-first-name form-control",
+                attrs: { type: "date", name: "to", placeholder: "Label..." },
+                domProps: { value: _vm.input.to },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  })
-                ])
-              ])
-            }),
+                    _vm.$set(_vm.input, "to", $event.target.value)
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "button",
@@ -49057,12 +48881,26 @@ var render = function() {
                 on: {
                   click: function($event) {
                     $event.preventDefault()
-                    _vm.addCity()
+                    _vm.addTripDay()
                   }
                 }
               },
               [_vm._v(" Add City ")]
             ),
+            _vm._v(" "),
+            _vm._l(_vm.tripDay, function(data, index) {
+              return _c("div", [
+                _vm._v(
+                  "\n              " +
+                    _vm._s(data.city.locality) +
+                    "\n              " +
+                    _vm._s(data.from) +
+                    "\n              " +
+                    _vm._s(data.to) +
+                    "\n            "
+                )
+              ])
+            }),
             _vm._v(" "),
             _c("div", { staticClass: "f1-buttons" }, [
               _c(
@@ -49100,7 +48938,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.step === 3
+    _vm.step === 2
       ? _c(
           "div",
           [
@@ -49167,35 +49005,14 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("pre", [_vm._v(" " + _vm._s(_vm.trip) + " ")])
+    _c("pre", [_vm._v(" " + _vm._s(_vm.tripParent) + " ")]),
+    _vm._v(" "),
+    _c("pre", [_vm._v(" " + _vm._s(_vm.input) + " ")]),
+    _vm._v(" "),
+    _c("pre", [_vm._v(" " + _vm._s(_vm.form) + " ")])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "f1-step-icon" }, [
-      _c("i", { staticClass: "fa fa-plus" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "f1-step-icon" }, [
-      _c("i", { staticClass: "fa fa-calendar" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "f1-step-icon" }, [
-      _c("i", { staticClass: "fa fa-users" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

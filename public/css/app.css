@@ -13558,6 +13558,10 @@ a.text-dark:focus {
   color: white;
 }
 
+#navbarSupportedContent {
+  background-color: #3097D1;
+}
+
 .navbar-brand img {
   width: 85px;
 }
@@ -13573,6 +13577,12 @@ a.text-dark:focus {
 
 .main-content {
   margin-top: 60px;
+}
+
+@media (max-width: 576px) {
+  /* .navbar a{
+        display: none;
+    }*/
 }
 
 .card-user {

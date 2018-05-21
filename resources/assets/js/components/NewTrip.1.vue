@@ -3,10 +3,31 @@
 <form ref="form" class="f1">
     <input type="hidden" name="_token" v-model="csrfToken">
     
+    <h3>Register To Our App</h3>
+    <p>Fill in the form to get instant access</p>
+    <div class="f1-steps">
+        <div class="f1-progress">
+            <div class="f1-progress-line" :class="classProgress"></div>
+        </div>
+        <div :class="steps[0]">
+            <div class="f1-step-icon"><i class="fa fa-plus"></i></div>
+            <p>about</p>
+        </div>
+        <div :class="steps[1]">
+            <div class="f1-step-icon"><i class="fa fa-calendar"></i></div>
+            <p>account</p>
+        </div>
+        <div :class="steps[2]">
+            <div class="f1-step-icon"><i class="fa fa-users"></i></div>
+            <p>social</p>
+        </div>
+    </div>
+
         <div v-if="step === 1">
-            <h4>Set Cities:</h4>
-            <label for="f1-email">Citt&agrave;</label>
-            <div class="form-group">
+            <h4>Set up your account:</h4>
+            <div v-for="(city, index) in trip.cities">
+              <div class="form-group">
+                  <label for="f1-email">Citt&agrave;</label>
                   <vue-google-autocomplete
                       id="map"
                       classname="form-control"
@@ -15,32 +36,25 @@
                       types="(cities)"
                   >
                   </vue-google-autocomplete>
+                  <input type="text" name="email" v-model="trip.cities[index].name" placeholder="Email..." class="f1-email form-control" id="f1-email">
+              </div>
+              <div class="form-group">
+                  <label for="f1-first-name">Dal</label>
+                  <input type="date" name="from"  v-model="trip.cities[index].from" placeholder="Label..." class="f1-first-name form-control" >
+              </div>
+              <div class="form-group">
+                  <label for="f1-first-name">Al</label>
+                  <input type="date" name="to"  v-model="trip.cities[index].to" placeholder="Label..." class="f1-first-name form-control" >
+              </div>
             </div>
-            <div class="form-group">
-                <label for="f1-first-name">Dal</label>
-                <input type="date" name="from"  v-model="input.from" placeholder="Label..." class="f1-first-name form-control" >
-            </div>
-            <div class="form-group">
-                <label for="f1-first-name">Al</label>
-                <input type="date" name="to"  v-model="input.to" placeholder="Label..." class="f1-first-name form-control" >
-            </div>
-            
-            <button class="btn btn-previous" @click.prevent="addTripDay()"> Add City </button>
-
-            <div v-for="(data, index) in tripDay">
-              {{ data.city.locality }}
-              {{ data.from }}
-              {{ data.to }}
-            </div>
-
-            
+            <button class="btn btn-previous" @click.prevent="addCity()"> Add City </button>
             <div class="f1-buttons">
                 <button type="button" class="btn btn-previous" @click.prevent="prev()">Previous</button>
                 <button type="button" class="btn btn-next" @click.prevent="next()">Next</button>
             </div>
         </div>
 
-        <div v-if="step === 2">
+        <div v-if="step === 3">
             <h4>Social media profiles:</h4>
             <autocomplete
               :url="friendshipRoute"
@@ -61,8 +75,7 @@
             </div>
         </div>
     <pre> {{tripParent}} </pre>
-    <pre> {{input}} </pre>
-    <pre> {{form}} </pre>
+    <pre> {{trip}} </pre>
   </form>
 
     
@@ -107,18 +120,37 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete';
     data: () => ({
         step:1,
         customHeaders: null,
+        classProgress: 'step-progress-1',
+        steps: [
+          {
+            // First Step
+            active: true,
+            'activated': false,
+            'f1-step': true,
+          },
+          {
+            // Second Step
+            active: false,
+            'activated': false,
+            'f1-step': true,
+          },
+          {
+            // Third Step
+            active: false,
+            'activated': false,
+            'f1-step': true,
+          },
+        ],
 
-        input: {
-          city: {},
-          from: null,
-          to: null
+        trip:{
+          label:null,
+          cities: [{
+            name: null,
+            from: null,
+            to: null,
+          }],
+          friends: [],
         },
-
-        
-        tripDay: []
-        
-
-        
     }),
     methods:{
       getData(obj){
@@ -130,12 +162,16 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete';
 
       },
 
-      addTripDay(){
-        this.tripDay.push( this.input )
+      addCity(){
+        this.trip.cities.push({
+          name: null,
+          from: null,
+          to: null,
+        })
       },
 
       getAddressData( addressData, placeResultData, id ) {
-            this.input.city = addressData;
+            this.form.address = addressData;
       },
 
       prev() {

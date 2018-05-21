@@ -19,6 +19,8 @@ Vue.config.performance = true;
 
 //https://vuejsdevelopers.com/2018/02/05/vue-laravel-crud/
 
+
+
 Vue.component('new-trip-component', require('./components/NewTrip.vue'));
 
 Vue.component('my-profile', require('./components/MyProfile.vue'));
