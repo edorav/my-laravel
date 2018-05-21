@@ -112,9 +112,9 @@ class TripController extends Controller
     public function show($id)
     {
         //
-        var_dump($id);die;
-
-        return view('trip.show');
+        $trip = Trip::find($id);
+        
+        return view('trip.show', compact('trip'));
     }
 
     /**
