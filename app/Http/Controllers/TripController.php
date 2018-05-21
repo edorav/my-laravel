@@ -36,6 +36,19 @@ class TripController extends Controller
     }
 
     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'label' => 'required|string|max:255',
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,7 +63,9 @@ class TripController extends Controller
             'label' => $request['label'],
         ]);
 
-        foreach($request->cities as $tripDay){
+        return redirect()->route('detail-trip', ['id'=>$trip->id]);
+
+        /*foreach($request->cities as $tripDay){
 
             $city = City::firstOrCreate([
                     'name' => $tripDay['name']
@@ -85,7 +100,7 @@ class TripController extends Controller
             'trip_id' => $trip->id,
         ]);
  
-        return $trip;
+        return $trip;*/
     }
 
     /**
@@ -97,6 +112,9 @@ class TripController extends Controller
     public function show($id)
     {
         //
+        var_dump($id);die;
+
+        return view('trip.show');
     }
 
     /**

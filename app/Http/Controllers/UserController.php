@@ -77,13 +77,12 @@ class UserController extends Controller
     {
         $loggedUser = Auth::user();
 
-        if ( $request->file('picture') ){
- 
+        if ($request->file('picture')) {
             $file = $request->file('picture');
             $folderId = uniqid();
             $directory = 'app/public/'. $folderId . DIRECTORY_SEPARATOR;
  
-            mkdir( storage_path( $directory) );
+            mkdir(storage_path( $directory) );
 
             $path = storage_path( $directory . 'default' . '.jpg'  );
             $imgResized = Image::make($file)->save($path);
@@ -99,11 +98,11 @@ class UserController extends Controller
         //$loggedUser->currencycode = $request->currencycode;
         $loggedUser->save();
 
-        if ( request()->wantsJson() ){
+        if (request()->wantsJson() ){
             return response()->json([
                 'status' => 'ok'
             ]);
-        }else{
+        } else {
             return back();
         }
         
