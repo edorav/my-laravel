@@ -23,6 +23,8 @@ class TripController extends Controller
     public function index()
     {
         //
+        return view('trip.index');
+        
     }
 
     /**
@@ -149,5 +151,25 @@ class TripController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function tripList(Request $request)
+    {
+        //
+
+        $pageNumber = $request->pagenumber;
+        $trips = Trip::paginate(20, ['*'], 'page', $pageNumber);
+
+        if (request()->wantsJson() ) {
+            return response()->json( $trips );
+        }else{
+            return view('trip.index',compact('trips'));
+        }
     }
 }

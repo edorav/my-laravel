@@ -22,5 +22,6 @@ Route::group(['middleware' => ['auth:api'],'prefix' => 'trip'], function(){
 });
 
 Route::group(['middleware' => ['auth:api'],'prefix' => 'trip'], function(){
+    Route::post('/tripList', 'TripController@tripList')->name('api-trip');
     Route::post('/', 'TripController@store')->name('api-store-trip');
 });

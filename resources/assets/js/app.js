@@ -25,6 +25,7 @@ Vue.component('new-trip-component', require('./components/NewTrip.vue'));
 
 Vue.component('my-profile', require('./components/MyProfile.vue'));
 
+Vue.component('trip-list', require('./components/TripList.vue'));
 
 const app = new Vue({
     el: '#app'

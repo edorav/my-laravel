@@ -39,6 +39,7 @@ Route::group(['prefix' => 'friendship'], function () {
 });
 
 Route::group(['prefix' => 'trip'], function () {
+    Route::get('/', 'TripController@index')->name('trip');
     Route::get('/create', 'TripController@create')->name('create-trip');
     Route::post('/', 'TripController@store')->name('store-trip');
     Route::get('/{id}', 'TripController@show')->name('detail-trip');

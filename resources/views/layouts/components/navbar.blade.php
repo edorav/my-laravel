@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top  bg-primary  navbar-light">
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand d-none d-md-block" href="{{ url('/') }}">
         <img src="{{ asset( 'img/brand.png') }}" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

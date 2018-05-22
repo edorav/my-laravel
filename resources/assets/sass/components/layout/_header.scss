@@ -9,10 +9,12 @@
     max-height: 50px;
 } 
 
-.navbar a{
+.navbar-light .navbar-nav .nav-link , .navbar-light .navbar-toggler{
+    color: $navbar-links;
+}
+.navbar-light a{
     text-decoration: none;
     background-color: transparent;
-    color: $navbar-links;
 }
 
 #navbarSupportedContent{
