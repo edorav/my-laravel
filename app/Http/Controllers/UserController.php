@@ -52,7 +52,7 @@ class UserController extends Controller
     public function show()
     {
         
-        return view('auth.myprofile' );
+        return view('auth.myprofile');
     }
 
     /**
