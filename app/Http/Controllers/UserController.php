@@ -98,7 +98,7 @@ class UserController extends Controller
         //$loggedUser->currencycode = $request->currencycode;
         $loggedUser->save();
 
-        if (request()->wantsJson() ){
+        if (request()->wantsJson() ) {
             return response()->json([
                 'status' => 'ok'
             ]);
@@ -114,10 +114,10 @@ class UserController extends Controller
     *   Ritorna tutti i viaggi dell'utente Loggato con la suddivisione in giorni
     *
     */
-    public function showMyTrip(){
+    public function showMyTrip() {
         $loggedUserTrips = Auth::user()->trips;
         
-        foreach($loggedUserTrips as $trip){
+        foreach($loggedUserTrips as $trip) {
             $loggedUserTrips->tripdays = $trip->tripdays;
         }
        // return response()->json($loggedUserTrips);

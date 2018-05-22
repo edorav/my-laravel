@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +40,7 @@ Route::group(['prefix' => 'friendship'], function () {
 
 Route::group(['prefix' => 'trip'], function () {
     Route::get('/create', 'TripController@create')->name('create-trip');
-    Route::post('/', 'TripController@store')->name('create-trip');
+    Route::post('/', 'TripController@store')->name('store-trip');
     Route::get('/{id}', 'TripController@show')->name('detail-trip');
     //Route::post('/', 'FriendshipController@store')->name('store-trip');
    // Route::get('/search', 'FriendshipController@showLoggedUserFriends')->name('get-friendships-list-by-search');
@@ -65,3 +64,8 @@ Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], fu
     Route::get('/', 'RoleController@index')->name('index-agency');
 });
 */
+
+
+// https://scotch.io/tutorials/simple-asynchronous-infinite-scroll-with-vue-watchers
+
+// https://github.com/PeachScript/vue-infinite-loading

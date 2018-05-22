@@ -26,6 +26,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('myprofile') }}">{{ __('My Profile') }}</a>
+                        <a class="dropdown-item" href="{{ route('create-trip') }}">{{ __('New Trip') }}</a>
                         <a class="dropdown-item" href="{{ route('mytrips') }}">{{ __('My Trips') }}</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
