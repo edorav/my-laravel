@@ -13976,7 +13976,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(60);
+module.exports = __webpack_require__(63);
 
 
 /***/ }),
@@ -14011,7 +14011,7 @@ Vue.component('my-profile', __webpack_require__(47));
 
 Vue.component('trip-list', __webpack_require__(56));
 
-Vue.component('my-trip-on-map', __webpack_require__(69));
+Vue.component('my-trip-on-map', __webpack_require__(60));
 
 var app = new Vue({
   el: '#app'
@@ -51835,6 +51835,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       pagenumber: 0,
+      lastPage: -1,
       trips: []
 
     };
@@ -51851,17 +51852,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
-      console.log('qua');
-      this.pagenumber++;
-      axios.post(this.apiRoute, { pagenumber: this.pagenumber }, this.getHeaders()).then(function (response) {
-        //console.log(response.data.data );
-        _this.trips = _this.trips.concat(response.data.data);
-
-        console.log($state);
+      console.log(this.pagenumber, this.lastPage);
+      if (this.pagenumber == this.lastPage) {
         $state.loaded();
-      }).catch(function (error) {
-        console.log(error);
-      });
+      } else {
+
+        this.pagenumber++;
+
+        axios.post(this.apiRoute, { pagenumber: this.pagenumber }, this.getHeaders()).then(function (response) {
+          //console.log(response.data.data );
+          _this.trips = _this.trips.concat(response.data.data);
+
+          _this.lastPage = response.data.last_page;
+          //console.log($state);
+          $state.loaded();
+        }).catch(function (error) {
+          //console.log(error);
+        });
+      }
     }
   }
 });
@@ -51884,7 +51892,7 @@ var render = function() {
     "div",
     [
       _vm._l(_vm.trips, function(trip) {
-        return _c("div", { staticClass: "card" }, [
+        return _c("div", { staticClass: "card mb-5" }, [
           _c("div", { staticClass: "card-header" }, [
             _vm._v("Trips " + _vm._s(trip.id))
           ]),
@@ -51924,28 +51932,14 @@ if (false) {
 
 /***/ }),
 /* 60 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(61)
 /* template */
-var __vue_template__ = __webpack_require__(70)
+var __vue_template__ = __webpack_require__(62)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -51984,30 +51978,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", {
-    staticStyle: { "min-width": "500px", "min-height": "500px" },
-    attrs: { id: "googleMap" }
-  })
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2bc44b25", module.exports)
-  }
-}
-
-/***/ }),
-/* 71 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52093,6 +52064,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   }
 });
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {
+    staticStyle: { "min-width": "500px", "min-height": "500px" },
+    attrs: { id: "googleMap" }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2bc44b25", module.exports)
+  }
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

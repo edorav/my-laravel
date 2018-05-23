@@ -38,7 +38,7 @@
                     @yield('content')
                     </div>
                     <div class="col-3">
-                    One of three columns
+                    @yield('sidebar-right')
                     </div>
                 </div>
             </div>

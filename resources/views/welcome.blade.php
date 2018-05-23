@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="flex-center position-ref full-height">
-            HOMEPAGE
-        </div>
+    @if (Auth::check())
+        @include('trip.index')
+    @endif
+@endsection
+
+
+@section('sidebar-right')
+
+
+
 @endsection

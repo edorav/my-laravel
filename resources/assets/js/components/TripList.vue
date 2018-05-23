@@ -2,7 +2,7 @@
 
 <div>
 
-  <div v-for="trip in trips" class="card">
+  <div v-for="trip in trips" class="card mb-5">
       <div class="card-header">Trips {{ trip.id }}</div>
 
       <div class="card-body">
@@ -45,6 +45,7 @@ import InfiniteLoading from 'vue-infinite-loading';
     },
     data: () => ({
       pagenumber: 0,
+      lastPage: -1,
       trips: [],
 
         
@@ -62,19 +63,26 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 
       infiniteHandler($state) {
-        console.log('qua');
-        this.pagenumber++;
-        axios.post( this.apiRoute , { pagenumber : this.pagenumber} ,  this.getHeaders() )
-        .then(response => {
-            //console.log(response.data.data );
-            this.trips = this.trips.concat( response.data.data );
-          
-            console.log($state);
-            $state.loaded();
-        })
-        .catch(error => {
-          console.log(error);
-        });
+        console.log( this.pagenumber , this.lastPage);
+        if ( this.pagenumber == this.lastPage ){
+          $state.loaded();
+        }else{
+
+          this.pagenumber++;
+
+          axios.post( this.apiRoute , { pagenumber : this.pagenumber} ,  this.getHeaders() )
+          .then(response => {
+              //console.log(response.data.data );
+              this.trips = this.trips.concat( response.data.data );
+              
+              this.lastPage = response.data.last_page;
+              //console.log($state);
+              $state.loaded();
+          })
+          .catch(error => {
+            //console.log(error);
+          });
+        }
       },
       
     }
