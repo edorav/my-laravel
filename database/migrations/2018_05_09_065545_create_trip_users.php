@@ -14,7 +14,7 @@ class CreateTripUsers extends Migration
     public function up()
     {
         //
-        Schema::create('trip_users', function (Blueprint $table) {
+        Schema::create('trip_user', function (Blueprint $table) {
             
             $table->increments('id');
             $table->integer('trip_id')->unsigned();
@@ -46,6 +46,6 @@ class CreateTripUsers extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('trip_users');
+        Schema::dropIfExists('trip_user');
     }
 }

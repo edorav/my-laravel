@@ -51,7 +51,6 @@ class UserController extends Controller
      */
     public function show()
     {
-        
         return view('auth.myprofile');
     }
 
@@ -82,9 +81,9 @@ class UserController extends Controller
             $folderId = uniqid();
             $directory = 'app/public/'. $folderId . DIRECTORY_SEPARATOR;
  
-            mkdir(storage_path( $directory) );
+            mkdir(storage_path($directory));
 
-            $path = storage_path( $directory . 'default' . '.jpg'  );
+            $path = storage_path($directory . 'default.jpg');
             $imgResized = Image::make($file)->save($path);
     
             $loggedUser->picture = $folderId;
@@ -98,7 +97,7 @@ class UserController extends Controller
         //$loggedUser->currencycode = $request->currencycode;
         $loggedUser->save();
 
-        if (request()->wantsJson() ) {
+        if (request()->wantsJson()) {
             return response()->json([
                 'status' => 'ok'
             ]);
@@ -114,13 +113,13 @@ class UserController extends Controller
     *   Ritorna tutti i viaggi dell'utente Loggato con la suddivisione in giorni
     *
     */
-    public function showMyTrip() {
+    public function showMyTrip()
+    {
         $loggedUserTrips = Auth::user()->trips;
         
-        foreach($loggedUserTrips as $trip) {
+        foreach ($loggedUserTrips as $trip) {
             $loggedUserTrips->tripdays = $trip->tripdays;
         }
-       // return response()->json($loggedUserTrips);
-        return view('auth.mytriplist' , compact('loggedUserTrips'));
+        return view('auth.mytriplist', compact('loggedUserTrips'));
     }
 }

@@ -65,8 +65,3 @@ Route::group(['middleware' => ['role:super-admin'],'prefix' => 'superadmin'], fu
     Route::get('/', 'RoleController@index')->name('index-agency');
 });
 */
-
-
-// https://scotch.io/tutorials/simple-asynchronous-infinite-scroll-with-vue-watchers
-
-// https://github.com/PeachScript/vue-infinite-loading

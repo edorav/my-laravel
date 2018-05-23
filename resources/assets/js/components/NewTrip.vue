@@ -81,7 +81,11 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete';
           type: String,
           required: true,
         },
-        submitRoute: {
+        storeUsersRoute: {
+          type: String,
+          required: true,
+        },
+        storeCitiesRoute: {
           type: String,
           required: true,
         },
@@ -164,8 +168,8 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete';
       },
 
       submit() {
-        console.log( this.getHeaders());
-        axios.post( this.submitRoute , this.trip , this.getHeaders() )
+
+        axios.post( this.storeCitiesRoute , this.trip , this.getHeaders() )
                 .then(response => {
                     this.form.name = '';
                     this.form.scopes = [];

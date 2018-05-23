@@ -29,10 +29,12 @@
         <main class="main-content">
             <div class="container-fluid">
                 <div class="row">
-                @if (Auth::check())
-                @include('layouts.components.user-sidebar')
-                @endif
-                    <div class="col-6">
+                    <div class="col-3 d-none d-md-block">
+                        @if (Auth::check())
+                        @include('layouts.components.user-sidebar')
+                        @endif
+                    </div>
+                    <div class="col-md-6 col-sm-12">
                     @yield('content')
                     </div>
                     <div class="col-3">

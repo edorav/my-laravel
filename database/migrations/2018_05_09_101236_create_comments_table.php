@@ -22,7 +22,7 @@ class CreateCommentsTable extends Migration
 
             $table->foreign('tripday_id')
                 ->references('id')
-                ->on('trip_days')
+                ->on('trip_day')
                 ->onDelete('cascade');
 
             $table->foreign('user_id')

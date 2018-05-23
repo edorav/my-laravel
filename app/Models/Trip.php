@@ -21,7 +21,7 @@ class Trip extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\Models\Trip');
+        return $this->belongsToMany('App\Models\User');
     }
 
     /**

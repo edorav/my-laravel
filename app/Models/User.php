@@ -12,7 +12,7 @@ use Hootlex\Friendships\Traits\Friendable;
 class User extends Authenticatable
 {
     use HasRoles;
-    use HasApiTokens , Notifiable;
+    use Notifiable;
     use Friendable;
 
     /**
@@ -33,16 +33,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getProfilePicture(){
-        return asset('storage/' . $this->picture . '/default.jpg');
-    }
-
-    /**
-     * The agencies that belong to the user.
-     */
-    public function agencies()
+    public function getProfilePicture()
     {
-        return $this->belongsToMany('App\Models\Agency');
+        return asset('storage/' . $this->picture . '/default.jpg');
     }
 
     /**

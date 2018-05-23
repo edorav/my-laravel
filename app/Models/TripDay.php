@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TripDay extends Model
 {
     //
+    protected $table = 'trip_day';
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +17,7 @@ class TripDay extends Model
         'from' , 'to' ,'trip_id', 'city_id'
     ];
 
-    public function trip() 
+    public function trip()
     {
         return $this->belongsTo('App\Models\Trip');
     }

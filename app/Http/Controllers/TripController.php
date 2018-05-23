@@ -67,42 +67,67 @@ class TripController extends Controller
 
         return redirect()->route('detail-trip', ['id'=>$trip->id]);
 
-        /*foreach($request->cities as $tripDay){
+    }
 
-            $city = City::firstOrCreate([
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeCities(Request $request)
+    {
+        $tripId = $request->tripId;
+
+        foreach ($request->cities as $tripDay) {
+            $city = City::firstOrCreate(
+                [
                     'name' => $tripDay['name']
                 ],
                 [
                     'name' => $tripDay['name'],
                     'country' => 'France',
-                    'latitude'=> 52.520007,
-                    'longitude'=> 13.404954
+                    'latitude'=> $tripDay['latitude'],
+                    'longitude'=> $tripDay['longitude']
                 ]
             );
 
             TripDay::create([
                 'city_id' => $city->id,
-                'trip_id' => $trip->id,
-                'from'=>$tripDay['from'],
-                'to'=>$tripDay['to']
-            ]);
-
-        }
-
-        foreach($request->friends as $people){
-
-            TripUser::create([
-                'user_id' => $people['id'],
-                'trip_id' => $trip->id,
+                'trip_id' => $tripId,
+                'from'=> $tripDay['from'],
+                'to'=> $tripDay['to']
             ]);
         }
+    }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeUsers(Request $request)
+    {
+        $tripId = $request->tripId;
+
+        foreach ($request->friends as $people) {
+            TripUser::create(
+                [
+                    'user_id' => $people['id'],
+                    'trip_id' => $tripId,
+                ]
+            );
+        }
+
+        // Anche Logged User come partecipante
         TripUser::create([
             'user_id' => Auth::user()->id,
-            'trip_id' => $trip->id,
+            'trip_id' => $tripId,
         ]);
  
-        return $trip;*/
+        return $tripId;
     }
 
     /**
@@ -161,15 +186,20 @@ class TripController extends Controller
      */
     public function tripList(Request $request)
     {
-        //
+        $loggedUser = Auth::guard('api')->user();
+        $myFriendsRelationships = $loggedUser->getAllFriendships();
 
-        $pageNumber = $request->pagenumber;
-        $trips = Trip::paginate(20, ['*'], 'page', $pageNumber);
-
-        if (request()->wantsJson() ) {
-            return response()->json( $trips );
-        }else{
-            return view('trip.index',compact('trips'));
+        //return response()->json($myFriendsRelationships);
+        //$trips = Trip::with('users')->get()->paginate(20, ['*'], 'page', $request->pagenumber);
+        $trips = Trip::with('users')->orderBy('created_at', 'DESC');
+        $pagination = $trips->paginate(20, ['*'], 'page', $request->pagenumber);
+       // $results = Trip::orderBy('created_at')->get();
+       // $trips = Trip::with('users')->get();
+        //$paginator = new Illuminate\Pagination\Paginator($trips, 20);
+        if (request()->wantsJson()) {
+            return response()->json($pagination);
+        } else {
+            return view('trip.index', compact('trips'));
         }
     }
 }

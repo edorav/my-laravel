@@ -13,7 +13,7 @@ class CreateTripDaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('trip_days', function (Blueprint $table) {
+        Schema::create('trip_day', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trip_id')->unsigned();
             $table->integer('city_id')->unsigned();
@@ -40,6 +40,6 @@ class CreateTripDaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trip_days');
+        Schema::dropIfExists('trip_day');
     }
 }

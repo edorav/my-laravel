@@ -7,6 +7,10 @@
 
       <div class="card-body">
           {{ trip.label }}
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" v-for="user in trip.users">{{user.firstname}} {{user.lastname}}</li>
+          </ul>
       </div>
   </div>
   <infinite-loading 
@@ -19,7 +23,7 @@
 </template>
 
 <script>
-
+// https://github.com/PeachScript/vue-infinite-loading
 import InfiniteLoading from 'vue-infinite-loading';
 
   export default{
