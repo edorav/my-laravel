@@ -21,4 +21,9 @@ class TripDay extends Model
     {
         return $this->belongsTo('App\Models\Trip');
     }
+
+    public function city()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
 }

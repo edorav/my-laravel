@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
+use App\Models\TripDay;
+use Illuminate\Support\Facades\DB;
 use Storage;
 
 class UserController extends Controller
@@ -115,11 +117,15 @@ class UserController extends Controller
     */
     public function showMyTrip()
     {
-        $loggedUserTrips = Auth::user()->trips;
-        
-        foreach ($loggedUserTrips as $trip) {
-            $loggedUserTrips->tripdays = $trip->tripdays;
-        }
-        return view('auth.mytriplist', compact('loggedUserTrips'));
+        $tripdays = DB::table('trip_day')
+                        ->join('trips', 'trips.id', '=', 'trip_day.trip_id')
+                        ->join('trip_user', 'trips.id', '=', 'trip_user.trip_id')
+                        ->join('users', 'trip_user.user_id', '=', 'users.id' )
+                        ->join('cities', 'cities.id', '=', 'trip_day.city_id')
+                        ->select('trips.*','trip_day.*','cities.*')
+                        ->where('users.id','=',Auth::user()->id)
+                        ->get();
+                        
+        return view('auth.mytriplist', compact('tripdays'));
     }
 }

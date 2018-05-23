@@ -27,6 +27,8 @@ Vue.component('my-profile', require('./components/MyProfile.vue'));
 
 Vue.component('trip-list', require('./components/TripList.vue'));
 
+Vue.component('my-trip-on-map', require('./components/MyTripOnMap.vue'));
+
 const app = new Vue({
     el: '#app'
 });
