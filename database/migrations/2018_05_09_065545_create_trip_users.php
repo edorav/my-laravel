@@ -20,6 +20,7 @@ class CreateTripUsers extends Migration
             $table->integer('trip_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('owner')->default(0);
             $table->timestamps();
             
 

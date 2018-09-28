@@ -14,7 +14,7 @@ class TripUser extends Model
      * @var array
      */
     protected $fillable = [
-        'trip_id', 'user_id'
+        'trip_id', 'user_id' , 'status' , 'owner'
     ];
 
     public function trip()
